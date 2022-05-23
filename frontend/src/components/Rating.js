@@ -72,7 +72,7 @@ Rating.defaultProps = {
 };
 //checking the types with proptypes built in React
 Rating.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   text: PropTypes.string.isRequired,
   color: PropTypes.string,
 };
