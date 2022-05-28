@@ -1,9 +1,11 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Login from "./components/Login";
+import RegisterScreen from "./screens/RegisterScreen";
+import Login from "./screens/LoginScreen";
 import CartScreen from "./screens/CartScreen";
 import { Container } from "react-bootstrap";
 import ProductScreen from "./screens/ProductScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 const App = () => {
@@ -20,6 +22,8 @@ const App = () => {
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/cart/:id" element={<CartScreen />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterScreen />} />
+            <Route path="/profile" element={<ProfileScreen />} />
           </Routes>
         </Container>
       </main>
