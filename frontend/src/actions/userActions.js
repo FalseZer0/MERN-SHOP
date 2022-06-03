@@ -46,7 +46,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
     const { data } = await axios.post("/api/users", { name, email, password });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    //login as well
+    //login as well, since header text is updated using payload from this action
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (e) {

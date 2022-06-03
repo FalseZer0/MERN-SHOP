@@ -14,8 +14,7 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = selector;
-  const redirect = location.search ? location.search.split("=")[1] : "/";
-
+  const redirect = location.search ? "/" + location.search.split("=")[1] : "/";
   useEffect(() => {
     if (userInfo) {
       //if user is already logged in redirect to the main page else redirec to login
