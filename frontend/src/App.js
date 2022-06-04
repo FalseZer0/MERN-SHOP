@@ -10,6 +10,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 const App = () => {
   return (
@@ -20,8 +21,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
-            {/* subject to change */}
-            {/*id is followed by * because it is optional */}
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/cart/:id" element={<CartScreen />} />
             <Route path="/login" element={<Login />} />
@@ -30,6 +29,7 @@ const App = () => {
             <Route path="/shipping" element={<ShippingScreen />} />
             <Route path="/payment" element={<PaymentScreen />} />
             <Route path="/placeorder" element={<PlaceOrderScreen />} />
+            <Route path="/order/:id" element={<OrderScreen />} />
           </Routes>
         </Container>
       </main>

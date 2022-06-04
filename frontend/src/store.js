@@ -12,7 +12,12 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
-import { orderCreateReducer } from "./reducers/orderReducers";
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  orderListMyReducer,
+} from "./reducers/orderReducers";
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -22,6 +27,9 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
+  orderMyList: orderListMyReducer,
 });
 //if the data is already stored in the local storage
 const cartItemsFromStorage = localStorage.getItem("cartItems")

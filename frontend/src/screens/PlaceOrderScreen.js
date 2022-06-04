@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -28,7 +28,7 @@ const PlaceOrderScreen = () => {
 
   useEffect(() => {
     if (success) {
-      navigate(`order/${order._id}`);
+      navigate(`/order/${order._id}`);
     }
     // eslint-disable-next-line
   }, [dispatch, success]);
@@ -91,7 +91,8 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x {item.price} = ${item.qty * item.price}
+                          {item.qty} x {item.price} = $
+                          {Number(item.qty * item.price).toFixed(2)}
                         </Col>
                       </Row>
                     </ListGroup.Item>
