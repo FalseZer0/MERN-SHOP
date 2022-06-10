@@ -4,12 +4,23 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getUsers,
+  deleteUser,
+  getUserById,
+  updateUser,
 } from "../controllers/userController.js";
 import protect from "../middleware/authMiddleware.js";
-const router = express.Router();
+import isAdmin from "../middleware/adminMiddleware.js";
 
-router.route("/").post(registerUser);
+const router = express.Router();
+router.route("/").post(registerUser).get(protect, isAdmin, getUsers);
 router.route("/login").post(authUser);
+router
+  .route("/:id")
+  .delete(protect, isAdmin, deleteUser)
+  .get(protect, isAdmin, getUserById)
+  .put(protect, isAdmin, updateUser);
+
 router
   .route("/profile")
   .get(protect, getUserProfile)
