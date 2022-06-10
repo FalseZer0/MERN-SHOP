@@ -81,6 +81,7 @@ const PlaceOrderScreen = () => {
                           <Image
                             src={item.image}
                             alt={item.name}
+                            className="mini-images"
                             fluid
                             rounded
                           />

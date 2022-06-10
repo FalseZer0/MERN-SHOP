@@ -15,3 +15,11 @@ main {
 .rating.span{
   margin: 0.1rem
 }
+.images{
+  height: 10rem;
+  width:10.5rem
+}
+.mini-images{
+  height: 4rem;
+  width:6rem
+}
