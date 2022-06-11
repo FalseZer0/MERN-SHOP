@@ -18,6 +18,7 @@ import {
 } from "../actions/productActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Meta from "../components/Meta";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 const ProductScreen = () => {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ const ProductScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={4}>
               {/* fluid is to keep image from going outside the col container */}
