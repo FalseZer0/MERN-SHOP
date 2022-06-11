@@ -25,6 +25,7 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
 } from "../constants/userConstants";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import { CART_RESET } from "../constants/cartConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 import axios from "axios";
@@ -224,6 +225,7 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: CART_RESET,
   });
+  dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_LIST_RESET });
   dispatch({ type: USER_DETAILS_RESET });

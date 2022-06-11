@@ -1,5 +1,6 @@
 import express from "express";
 import colors from "colors";
+import morgan from "morgan";
 import path from "path";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
@@ -16,6 +17,10 @@ const MODE = process.env.NODE_ENV;
 connectDB();
 
 const app = express();
+
+if (process.env.NODE_ENV == "development") {
+  app.use(morgan("dev"));
+}
 
 //middleware to parse json data in the body of request
 app.use(express.json());
