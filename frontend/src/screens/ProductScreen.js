@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Toast, ToastContainer } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -16,6 +17,7 @@ import {
   listProductDetails,
   createProductReview,
 } from "../actions/productActions";
+import { addToCart } from "../actions/cartActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Meta from "../components/Meta";
@@ -25,7 +27,7 @@ const ProductScreen = () => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -45,7 +47,13 @@ const ProductScreen = () => {
     dispatch(listProductDetails(params.id));
   }, [dispatch, params, successProductReview]);
   const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`);
+    dispatch(addToCart(product._id, qty));
+    setShow(true);
+    // navigate(`/cart/${params.id}?qty=${qty}`);
+  };
+  const goToCartHandler = (e) => {
+    e.preventDefault();
+    navigate(`/cart`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -53,9 +61,34 @@ const ProductScreen = () => {
   };
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
-        Go back
-      </Link>
+      <Row className="add-space">
+        <Col md={9}>
+          <Link className="btn btn-light my-3" to="/">
+            Go back
+          </Link>
+        </Col>
+        <Col md={3}>
+          <ToastContainer>
+            <Toast
+              className="d-inline-block m-1"
+              bg="Light"
+              onClose={() => setShow(false)}
+              show={show}
+              delay={3000}
+              animation={true}
+              autohide
+            >
+              <Button
+                className="btn btn-success"
+                size="md"
+                onClick={goToCartHandler}
+              >
+                Go to Cart
+              </Button>
+            </Toast>
+          </ToastContainer>
+        </Col>
+      </Row>
       {loading ? (
         <Loader />
       ) : error ? (
