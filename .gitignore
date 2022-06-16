@@ -12,6 +12,7 @@ node_modules/
 
 # production
 /frontend/build
+/uploads
 
 # misc
 .DS_Store
