@@ -11,7 +11,8 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
+import pkg from "cloudinary";
+const cloudinary = pkg;
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -38,6 +39,11 @@ app.use(
 );
 app.get("/", (req, res) => {
   res.send("api is running");
+});
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
 });
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);

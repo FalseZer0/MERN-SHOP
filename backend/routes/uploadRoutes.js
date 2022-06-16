@@ -3,6 +3,10 @@ import express from "express";
 import multer from "multer";
 import protect from "../middleware/authMiddleware.js";
 import isAdmin from "../middleware/adminMiddleware.js";
+import asyncHandler from "express-async-handler";
+import pkg from "cloudinary";
+const cloudinary = pkg;
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -28,6 +32,7 @@ function checkFileType(file, cb) {
     cb("Images only!");
   }
 }
+
 const upload = multer({
   storage,
   filefilter: function (req, file, cb) {
@@ -35,8 +40,18 @@ const upload = multer({
   },
 });
 
-router.post("/", protect, isAdmin, upload.single("image"), (req, res) => {
-  res.send(`/${req.file.path}`);
-});
+// router.post("/", protect, isAdmin, upload.single("image"), (req, res) => {
+//   res.send(`/${req.file.path}`);
+// });
+router.post(
+  "/",
+  protect,
+  isAdmin,
+  upload.single("image"),
+  asyncHandler(async (req, res) => {
+    const uploadPhoto = await cloudinary.uploader.upload(`${req.file.path}`);
+    res.send(uploadPhoto.url);
+  })
+);
 
 export default router;
