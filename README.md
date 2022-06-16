@@ -1,7 +1,7 @@
 # MERN-SHOP
 https://mernmegashopapp.herokuapp.com
 
-##Description
+## Description
 Working prototype of e-commerce web application using MongoDB, Express, React, NodeJs, Redux, etc.
 
 The web-app has working shopping cart feature with PayPal & credit/debit payments
