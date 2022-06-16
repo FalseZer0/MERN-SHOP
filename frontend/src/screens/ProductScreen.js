@@ -49,7 +49,6 @@ const ProductScreen = () => {
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, qty));
     setShow(true);
-    // navigate(`/cart/${params.id}?qty=${qty}`);
   };
   const goToCartHandler = (e) => {
     e.preventDefault();

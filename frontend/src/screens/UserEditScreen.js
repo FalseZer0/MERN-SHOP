@@ -19,25 +19,29 @@ const UserEditScreen = () => {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const userUpdate = useSelector((state) => state.userUpdate);
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
   } = userUpdate;
-
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET });
       navigate("/admin/userlist");
     } else {
-      if (!user.name || user._id !== userId) {
-        dispatch(getUserDetails(userId));
+      if (userInfo && userInfo.isAdmin) {
+        if (!user.name || user._id !== userId) {
+          dispatch(getUserDetails(userId));
+        } else {
+          setName(user.name);
+          setEmail(user.email);
+          setIsAdmin(user.isAdmin);
+        }
       } else {
-        setName(user.name);
-        setEmail(user.email);
-        setIsAdmin(user.isAdmin);
+        navigate("/login");
       }
     }
   }, [dispatch, navigate, userId, user, successUpdate]);

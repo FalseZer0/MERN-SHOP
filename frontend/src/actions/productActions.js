@@ -66,12 +66,10 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-    await axios.delete(`/api/products/${id}`, config);
+
+    await axios.delete(`/api/products/${id}`, {
+      withCredentials: true,
+    });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (e) {
     dispatch({
@@ -89,12 +87,14 @@ export const createProduct = () => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-    const { data } = await axios.post(`/api/products`, {}, config);
+
+    const { data } = await axios.post(
+      `/api/products`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (e) {
     dispatch({
@@ -112,17 +112,9 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-    const { data } = await axios.put(
-      `/api/products/${product._id}`,
-      product,
-      config
-    );
+    const { data } = await axios.put(`/api/products/${product._id}`, product, {
+      withCredentials: true,
+    });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (e) {
@@ -142,13 +134,9 @@ export const createProductReview =
       const {
         userLogin: { userInfo },
       } = getState();
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      };
-      await axios.post(`/api/products/${productId}/reviews`, review, config);
+      await axios.post(`/api/products/${productId}/reviews`, review, {
+        withCredentials: true,
+      });
       dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
     } catch (e) {
       dispatch({

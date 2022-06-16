@@ -8,13 +8,12 @@ const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
+    await generateToken(res, user._id);
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      password: user.password,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
     });
   } else {
     //unauthorized
@@ -40,12 +39,12 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
     });
     if (user) {
+      await generateToken(res, user._id);
       res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        token: generateToken(user._id),
       });
     } else {
       res.status(400);
@@ -112,13 +111,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.password = req.body.password;
     }
     const updatedUser = await user.save();
+    await generateToken(res, user._id);
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
       password: updatedUser.password,
       isAdmin: updatedUser.isAdmin,
-      token: generateToken(updatedUser._id),
     });
   } else {
     res.status(404);

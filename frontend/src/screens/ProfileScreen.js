@@ -11,7 +11,6 @@ import {
   resetUpdateUserProfile,
 } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
-// import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 const ProfileScreen = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -33,9 +32,9 @@ const ProfileScreen = () => {
       navigate("/login");
     } else {
       //
-      if (!user || !user.name || success) {
+      if (!user || !user.name || success || user.name != userInfo.name) {
         dispatch(resetUpdateUserProfile());
-        dispatch(getUserDetails());
+        dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {
         setName(user.name);

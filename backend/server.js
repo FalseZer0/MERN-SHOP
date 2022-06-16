@@ -9,6 +9,9 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -24,7 +27,15 @@ if (process.env.NODE_ENV == "development") {
 
 //middleware to parse json data in the body of request
 app.use(express.json());
-
+app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    credentials: true,
+  })
+);
 app.get("/", (req, res) => {
   res.send("api is running");
 });

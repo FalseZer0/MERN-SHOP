@@ -34,6 +34,9 @@ const ProductEditScreen = () => {
   } = productUpdate;
 
   useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       navigate("/admin/productlist");
@@ -73,17 +76,12 @@ const ProductEditScreen = () => {
     formData.append("image", file);
     setUploading(true);
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      };
-      const { data } = await axios.post("/api/upload", formData, config);
+      const { data } = await axios.post("/api/upload", formData, {
+        withCredentials: true,
+      });
       setImage(data);
       setUploading(false);
     } catch (error) {
-      //   console.error(error);
       setUploading(false);
     }
   };
@@ -131,12 +129,6 @@ const ProductEditScreen = () => {
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
               <Form.Control type="file" onChange={uploadFileHandler} />
-              {/* <Form.File
-                id="image-file"
-                label="Choose File"
-                custom
-                onChange={uploadFileHandler}
-              ></Form.File> */}
               {uploading && <Loader />}
             </Form.Group>
 
