@@ -14,7 +14,11 @@ Products are presented using pagination
 
 Products can be searched by keywords
 
+Product images are stored in cloudinary
+
 Top rated products are presented in the carousel
+
+Web-app is deployed on heroku
 
 Authorization and authentication is performed using JWT which is stored and transmitted via httponly cookie to avoid XSS attack. Still vulnerable to CSRF attack which is a room for future improvements
 
