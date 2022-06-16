@@ -53,7 +53,7 @@ const ProductEditScreen = () => {
         setDescription(product.description);
       }
     }
-  }, [dispatch, navigate, productId, successUpdate, product]);
+  }, [dispatch, navigate, productId, successUpdate, product, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();

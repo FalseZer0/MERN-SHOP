@@ -86,9 +86,6 @@ export const register = (name, email, password) => async (dispatch) => {
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.get(`/api/users/${id}`, {
       withCredentials: true,
     });
@@ -120,9 +117,6 @@ export const resetUpdateUserProfile = () => async (dispatch) => {
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.put(`/api/users/profile`, user, {
       withCredentials: true,
     });
@@ -143,9 +137,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LIST_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.get(`/api/users`, {
       withCredentials: true,
     });
@@ -163,9 +154,6 @@ export const listUsers = () => async (dispatch, getState) => {
 export const deleteUser = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     await axios.delete(`/api/users/${id}`, {
       withCredentials: true,
     });
@@ -183,9 +171,6 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 export const updateUser = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.put(`/api/users/${user._id}`, user, {
       withCredentials: true,
     });

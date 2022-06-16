@@ -63,9 +63,6 @@ export const listProductDetails = (id) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_DELETE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
 
     await axios.delete(`/api/products/${id}`, {
       withCredentials: true,
@@ -84,9 +81,6 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 export const createProduct = () => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_CREATE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
 
     const { data } = await axios.post(
       `/api/products`,
@@ -109,9 +103,6 @@ export const createProduct = () => async (dispatch, getState) => {
 export const updateProduct = (product) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_UPDATE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.put(`/api/products/${product._id}`, product, {
       withCredentials: true,
     });
@@ -131,9 +122,6 @@ export const createProductReview =
   (productId, review) => async (dispatch, getState) => {
     try {
       dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
-      const {
-        userLogin: { userInfo },
-      } = getState();
       await axios.post(`/api/products/${productId}/reviews`, review, {
         withCredentials: true,
       });

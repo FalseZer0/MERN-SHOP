@@ -31,7 +31,6 @@ const ProfileScreen = () => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      //
       if (!user || !user.name || success || user.name != userInfo.name) {
         dispatch(resetUpdateUserProfile());
         dispatch(getUserDetails("profile"));

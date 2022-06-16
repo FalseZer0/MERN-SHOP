@@ -22,9 +22,6 @@ import axios from "axios";
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_CREATE_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.post(`/api/orders`, order, {
       withCredentials: true,
     });
@@ -42,9 +39,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DETAIL_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
     const { data } = await axios.get(`/api/orders/${id}`, {
       withCredentials: true,
     });
@@ -63,10 +57,6 @@ export const payOrder =
   (orderId, paymentResult) => async (dispatch, getState) => {
     try {
       dispatch({ type: ORDER_PAY_REQUEST });
-      const {
-        userLogin: { userInfo },
-      } = getState();
-
       const { data } = await axios.put(
         `/api/orders/${orderId}/pay`,
         paymentResult,
@@ -89,9 +79,6 @@ export const payOrder =
 export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DELIVER_REQUEST });
-    const {
-      userLogin: { userInfo },
-    } = getState();
 
     const { data } = await axios.put(
       `/api/orders/${order._id}/delivered`,
