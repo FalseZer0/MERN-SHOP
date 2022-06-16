@@ -12,6 +12,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import pkg from "cloudinary";
+
 const cloudinary = pkg;
 dotenv.config();
 

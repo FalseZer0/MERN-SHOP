@@ -8,6 +8,8 @@ const SearchBar = () => {
     e.preventDefault();
     if (keyword.trim()) {
       navigate(`/search/${keyword}`);
+      e.target.reset();
+      setKeyword("");
     } else {
       navigate("/");
     }
